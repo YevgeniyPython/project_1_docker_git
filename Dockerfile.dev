@@ -1,0 +1,25 @@
+# Docker-команда FROM вказує базовий образ контейнера
+# Наш базовий образ - це Linux з попередньо встановленим python-3.10
+FROM python:3.12-bookworm
+
+# Встановимо змінну середовища
+# ENV APP_HOME /app
+
+# # Встановимо робочу директорію всередині контейнера
+# WORKDIR $APP_HOME
+
+# Скопіюємо інші файли в робочу директорію контейнера
+COPY app /app
+
+# Встановимо залежності всередині контейнера
+# RUN apt update
+# RUN apt install -y python3 \
+#                    python3-pip
+RUN pip install -r /app/requirements.txt
+
+# Позначимо порт, де працює застосунок всередині контейнера
+# EXPOSE 5000
+
+# Запустимо наш застосунок всередині контейнера
+# ENTRYPOINT [ "python3", "/app/main.py" ]
+CMD ["python3", "/main/app.py"]
